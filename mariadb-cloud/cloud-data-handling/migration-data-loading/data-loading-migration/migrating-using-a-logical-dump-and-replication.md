@@ -17,7 +17,7 @@ To minimize downtime during migration, you can set up live replication from your
 
 {% stepper %}
 {% step %}
-### Dump Source Database
+#### Dump Source Database
 
 Take a dump of your source database using `mysqldump` or `mariadb-dump`. Include triggers, procedures, views, and schedules in the dump, and ignore the system databases to avoid conflicts with the existing MariaDB Cloud schemas.
 
@@ -36,7 +36,7 @@ mysqldump -u [username] -p -h [hostname]
 {% endstep %}
 
 {% step %}
-### Create Users and Grants Separately
+#### Create Users and Grants Separately
 
 To avoid conflicts with the existing MariaDB Cloud users, use `SELECT CONCAT` on your source database to create users and grants in separate files. Note that you may need to create the schema and table grants separately as well.
 
@@ -64,7 +64,7 @@ mysql -h [hostname] -u [username] -p \
 {% endstep %}
 
 {% step %}
-### **Import Dumps into MariaDB Cloud**
+#### **Import Dumps into MariaDB Cloud**
 
 Import the logical dumps (SQL files) into your MariaDB Cloud database, ensuring to load the user and grant dumps after the main dump.
 
@@ -78,7 +78,7 @@ If you encounter an error while importing your users, you may need to uninstall 
 {% endstep %}
 
 {% step %}
-### **Start Replication**
+#### **Start Replication**
 
 Turn on replication using MariaDB Cloud stored procedures. There are procedures allowing you to set up and start replication. See our [documentation](../../../reference-guide/stored-procedures.md) for details. The `dump.sql` file you created in step 1 will contain the GTID and binary log information needed for the `change_external_primary` procedure.
 

@@ -12,7 +12,7 @@ MariaDB Cloud offers a robust platform for managing databases in the cloud and s
 
 {% stepper %}
 {% step %}
-### **Generate MariaDB Cloud API Key**
+#### **Generate MariaDB Cloud API Key**
 
 Go to the [User Profile](https://app.skysql.com/user-profile/api-keys/) page of the MariaDB Cloud Portal to generate an API key. 2. Export the value from the token field to an environment variable $API\_KEY
 
@@ -24,7 +24,7 @@ The `API_KEY` environment variable will be used in the subsequent steps.
 {% endstep %}
 
 {% step %}
-### **Launch MariaDB Cloud Services**
+#### **Launch MariaDB Cloud Services**
 
 Launch two MariaDB Cloud services - a Primary that your application(s) will connect to and a Secondary that will act as a globally available service. If you already have your Primary service running, you simply need to create a new Secondary service.
 
@@ -72,7 +72,7 @@ Each MariaDB Cloud service has a unique identifier. Please make note of the iden
 {% endstep %}
 
 {% step %}
-### **Back up the Primary and Restore to the Secondary Service**
+#### **Back up the Primary and Restore to the Secondary Service**
 
 In a real-world scenario, the Primary service will contain data, which will need to be restored to the Standby service before the replication can be set up. MariaDB Cloud performs a full backup of your services every night. You can either use an existing nightly backup or create a schedule to perform a new full backup.
 
@@ -123,7 +123,7 @@ Once the restore is complete, the default username and password displayed in the
 {% endstep %}
 
 {% step %}
-### **Set up Replication Between the Primary and the Secondary**
+#### **Set up Replication Between the Primary and the Secondary**
 
 1\. Since we want to set up replication between the two MariaDB Cloud services, the Secondary service should be able to connect to the Primary service. Add the Outbound IP address of the Secondary service to the Allowlist of the Primary service. Outbound IP can be obtained from the "Service Details" page in the MariaDB Cloud portal. Please add this IP to the allowlist of Primary service in the portal.
 

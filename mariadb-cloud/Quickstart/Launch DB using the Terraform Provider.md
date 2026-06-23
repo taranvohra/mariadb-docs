@@ -29,7 +29,7 @@ For a list of operating systems that have binaries available for Terraform, see 
 
 {% stepper %}
 {% step %}
-### **Generate API Key**
+#### **Generate API Key**
 
 1. Go to the [Generate API Key](https://app.skysql.com/user-profile/api-keys) page.
 2. Fill out a name for the API key.
@@ -39,7 +39,7 @@ For a list of operating systems that have binaries available for Terraform, see 
 {% endstep %}
 
 {% step %}
-### **Create Terraform Project Directory**
+#### **Create Terraform Project Directory**
 
 Create a directory for your Terraform project and change to the directory:
 
@@ -50,7 +50,7 @@ cd ~/skysql-nr-tf
 {% endstep %}
 
 {% step %}
-### **Create `main.tf`**
+#### **Create `main.tf`**
 
 In the Terraform project directory, create a `main.tf` file that contains the following:
 
@@ -146,7 +146,7 @@ data "skysql_availability_zones" "default" {
 {% endstep %}
 
 {% step %}
-### **Create `outputs.tf`**
+#### **Create `outputs.tf`**
 
 In the Terraform project directory, create an `outputs.tf` file that contains the [output values](https://developer.hashicorp.com/terraform/language/values/outputs) used to display metadata about the MariaDB Cloud service:
 
@@ -183,7 +183,7 @@ output "availability_zones" {
 {% endstep %}
 
 {% step %}
-### **Create `variables.tf`**
+#### **Create `variables.tf`**
 
 In the Terraform project directory, create a `variables.tf` file that contains the [input variables](https://developer.hashicorp.com/terraform/language/values/variables) used to configure the MariaDB Cloud service:
 
@@ -292,7 +292,7 @@ The variables are configured in the next step.
 {% endstep %}
 
 {% step %}
-### **Configure Service in a `.tfvars` File**
+#### **Configure Service in a `.tfvars` File**
 
 A [`.tfvars` file](https://developer.hashicorp.com/terraform/tutorials/configuration-language/variables#assign-values-with-a-file) can be used to configure the service using the input variables.
 
@@ -339,7 +339,7 @@ The following steps assume that the file is called `skysql-nr-quickstart.tfvars`
 {% endstep %}
 
 {% step %}
-### **Run `terraform init`**
+#### **Run `terraform init`**
 
 Initialize the Terraform project directory and download the Terraform provider from the [Terraform Registry](https://registry.terraform.io/namespaces/skysqlinc) by executing the [`terraform init` command](https://developer.hashicorp.com/terraform/cli/commands/init):
 
@@ -351,7 +351,7 @@ If you need to download the provider manually, see "[Manually Install Provider f
 {% endstep %}
 
 {% step %}
-### **Run `terraform plan`**
+#### **Run `terraform plan`**
 
 Create a Terraform execution plan by executing the [`terraform plan` command](https://developer.hashicorp.com/terraform/cli/commands/plan) and specifying the path to the `.tfvars` file:
 
@@ -361,7 +361,7 @@ terraform plan -var-file="skysql-nr-quickstart.tfvars"
 {% endstep %}
 
 {% step %}
-### **Run `terraform apply`**
+#### **Run `terraform apply`**
 
 Execute the Terraform execution plan and create the MariaDB Cloud service by executing the [`terraform apply` command](https://developer.hashicorp.com/terraform/cli/commands/apply) and specifying the path to the `.tfvars` file:
 
@@ -417,7 +417,7 @@ Then Terraform prints the outputs.
 {% endstep %}
 
 {% step %}
-### **Obtain Connection Credentials**
+#### **Obtain Connection Credentials**
 
 Obtain the connection credentials for the new MariaDB Cloud service by executing the following commands:
 
@@ -440,7 +440,7 @@ Obtain the connection credentials for the new MariaDB Cloud service by executing
 {% endstep %}
 
 {% step %}
-### **Connect**
+#### **Connect**
 
 Connect to the MariaDB Cloud service by executing the connection command from the previous step:
 
@@ -466,7 +466,7 @@ MariaDB [(none)]>
 {% endstep %}
 
 {% step %}
-### **Run `terraform destroy`**
+#### **Run `terraform destroy`**
 
 Delete the service by executing the [`terraform destroy` command](https://developer.hashicorp.com/terraform/cli/commands/destroy) and specifying the path to the `.tfvars` file:
 

@@ -6,7 +6,7 @@ This walkthrough explains how to launch database services and manage the lifecyc
 
 {% stepper %}
 {% step %}
-### **Generate API Key**
+#### **Generate API Key**
 
 1. Go to the [MariaDB Cloud API Key management page](https://app.skysql.com/user-profile/api-keys) and generate an API key
 2.  Export the value from the token field to an environment variable $API\_KEY
@@ -26,7 +26,7 @@ Use it on subsequent requests, for example:
 {% endstep %}
 
 {% step %}
-### **Use the API Reference Guide to try out the APIs**
+#### **Use the API Reference Guide to try out the APIs**
 
 You can use the API Documentation here and directly try out the APIs in your browser.
 
@@ -48,7 +48,7 @@ Backslashes are used to indicate a command spans multiple lines. Remove them if 
 {% endstep %}
 
 {% step %}
-### **Determine the Client IP Address**
+#### **Determine the Client IP Address**
 
 When your new service is created, your client can only connect through the service's firewall if the client's IP address is in the service's IP allowlist.
 
@@ -62,7 +62,7 @@ export SKYSQL_CLIENT_IP=`curl -sS checkip.amazonaws.com`
 {% endstep %}
 
 {% step %}
-### **Launch a Service**
+#### **Launch a Service**
 
 To launch a service:
 
@@ -127,7 +127,7 @@ Upon success, the command will return JSON with details about the new service.
 {% endstep %}
 
 {% step %}
-### **Check Service State**
+#### **Check Service State**
 
 Before advancing, check the service state using the `/provisioning/v1/services/${SKYSQL_SERVICE}` [API endpoint](https://apidocs.skysql.com/#/allowed_roles%3AADMIN%3BMEMBER%3BVIEWER/get_provisioning_v1_services__service_id_):
 
@@ -145,7 +145,7 @@ When the service has been launched, the JSON payload contains `"ready"`, and you
 {% endstep %}
 
 {% step %}
-### **Obtain Connection Details**
+#### **Obtain Connection Details**
 
 Obtain the connection credentials for the new MariaDB Cloud service by executing the following commands:
 
@@ -187,7 +187,7 @@ The default username and password will not be available until the service state 
 {% endstep %}
 
 {% step %}
-### **Connect**
+#### **Connect**
 
 Connect to the database using the host, port, and default credentials using the [mariadb client](https://mariadb.com/docs/server/connect/clients/mariadb-client/):
 
@@ -201,7 +201,7 @@ If you don't want the password to appear on the command-line, specify the `--pas
 {% endstep %}
 
 {% step %}
-### **Save Connection Information**
+#### **Save Connection Information**
 
 {% hint style="info" %}
 This step is optional.

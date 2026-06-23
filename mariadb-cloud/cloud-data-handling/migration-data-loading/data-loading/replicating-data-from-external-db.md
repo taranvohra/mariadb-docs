@@ -15,9 +15,9 @@ Ensure that the external primary server is compatible with the version of MariaD
 
 {% stepper %}
 {% step %}
-### Obtain the Log File and Position
+#### Obtain the Log File and Position
 
-#### MySQL:
+**MySQL:**
 
 If using MySQL, obtain the binary log file and position from which to start replication. This can be retrieved from a logical dump or `xtrabackup_binlog_info` file.\
 If the source database is idle, use the `SHOW MASTER STATUS` statement to get the current binary log file and position:
@@ -26,7 +26,7 @@ If the source database is idle, use the `SHOW MASTER STATUS` statement to get th
 SHOW MASTER STATUS;
 ```
 
-#### MariaDB:
+**MariaDB:**
 
 For MariaDB, replication can be done using GTID. Obtain the GTID position using the `@@current_gtid_pos` variable:
 
@@ -36,9 +36,9 @@ SELECT @@current_gtid_pos;
 {% endstep %}
 
 {% step %}
-### Configure the Log File and Position
+#### Configure the Log File and Position
 
-#### For MySQL (Binary Log Position Based)
+**For MySQL (Binary Log Position Based)**
 
 Configure the binary log file and position on the MariaDB Cloud service using the following stored procedure:
 
@@ -59,7 +59,7 @@ For MariaDB (GTID Based) if preferred refer to [sky.change\_external\_primary\_g
 {% endstep %}
 
 {% step %}
-### Start Replication
+#### Start Replication
 
 Once the configuration is complete, start replication on the MariaDB Cloud service using the following command:
 
@@ -81,7 +81,7 @@ You can find the documentation for this procedure [here](../../../reference-guid
 {% endstep %}
 
 {% step %}
-### Check Replication Status
+#### Check Replication Status
 
 To verify the status of replication, you can run the following stored procedure on MariaDB Cloud:
 
