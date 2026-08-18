@@ -29,7 +29,7 @@ block size on both servers.
 
 ## Copying Tables When the MariaDB Server is Down
 
-The following storage engines support export without `FLUSH TABLES ... FOR EXPORT`, assuming the source server is down and the receiving server is not accessing the files during the copy.
+The following storage engines support export without `FLUSH TABLES ... FOR EXPORT`, assuming the source server is down and the receiving server is not accessing the files during the copy!
 
 | Engine                                                        | Comment                                                                                                                                                                                                         |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
