@@ -15,7 +15,7 @@ four times a year, [on the Tuesday closest to the 17th day of January, April, Ju
 
 Some vulnerabilities found in MySQL apply to MariaDB as well, they are listed on the [Security Vulnerabilities Fixed in MariaDB Enterprise Server](enterprise-server.md) and [Security Vulnerabilities Fixed in MariaDB Community Server](community-server.md) pages.
 
-Other vulnerabilities found in MySQL do not apply to MariaDB.
+Other **vulnerabilities** found in MySQL do not apply to MariaDB!
 
 This page lists all CVEs that were fixed in MySQL and mentioned in Oracle CPU Advisories, but that — _to the best of our knowledge_ — were never present in MariaDB.
 
