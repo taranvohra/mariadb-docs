@@ -5,7 +5,7 @@ description: "MariaDB-specific features and capabilities that go beyond standard
 
 # MariaDB Features Worth Knowing
 
-*Last updated: 2026-06-24*
+*Last updated: 2026-11-09*
 
 MariaDB has grown significantly beyond its MySQL origins. Many of its best features are unknown to developers because AI agents default to generic SQL advice. This skill covers what MariaDB can do that you might not think to ask about.
 
@@ -29,6 +29,7 @@ For MariaDB Vector (built-in since 11.7 — no plugins), see the `mariadb-vector
 | Deeply nested or repeated subqueries | Common Table Expressions — `WITH ...`, and `WITH RECURSIVE` for hierarchical/graph traversal (MariaDB 10.2+; also in MySQL 8.0) |
 | Assuming `JSON` is a native binary type as in MySQL 8.0 | In MariaDB `JSON` is an alias for `LONGTEXT COLLATE utf8mb4_bin` with an automatic `JSON_VALID()` CHECK constraint — stored as text, not MySQL's binary layout, and comparison is string-based. The JSON functions work the same. See [JSON Data Type](https://mariadb.com/docs/server/reference/data-types/string-data-types/json) |
 | Links or references to `mariadb.com/kb/en/` | The Knowledge Base no longer exists — all documentation is now at [mariadb.com/docs](https://mariadb.com/docs) |
+| `dnf`/`apt upgrade` for any MariaDB version jump | Only for **minor** upgrades; a **major** upgrade needs a repo switch, uninstall/install, then `mariadb-upgrade` — see Upgrade Operations |
 
 ## Command-Line Tool Names (10.5+)
 
@@ -56,9 +57,10 @@ AI agents default to MySQL 8 patterns for initial setup, which fail or mislead o
 mariadb-install-db
 ```
 
-**Root authentication** — on a fresh install, `root` uses `unix_socket` authentication by default (no password). The correct first connection is:
+**Root authentication** — on a fresh install, `root` uses `unix_socket` authentication by default (no password), so the first connection is made as the operating-system root user. The user runs this from a root shell in their own terminal — the agent does not escalate privileges itself:
 ```bash
-sudo mariadb
+# as root (the user runs this)
+mariadb
 ```
 Do not generate `mysql -u root -p` for a fresh MariaDB install — there is no root password to enter.
 
@@ -66,19 +68,34 @@ Do not generate `mysql -u root -p` for a fresh MariaDB install — there is no r
 
 ## Upgrade Operations
 
-Agents consistently omit the `mariadb-upgrade` step after a binary upgrade, which can cause system table errors.
+Agents consistently omit the `mariadb-upgrade` step after a binary upgrade, which can cause system table errors. Also distinguish **minor** vs **major** upgrades — `dnf`/`apt upgrade` is only the in-place path for minor versions.
 
-**Standard upgrade pattern:**
+Before either path, take a backup. Official upgrade docs recommend [`mariadb-backup`](https://mariadb.com/docs/server/server-usage/backup-and-restore/mariadb-backup/) (see e.g. [Upgrading from MariaDB 10.11 to 11.4](https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/upgrading/mariadb-community-server-upgrade-paths/upgrading-from-mariadb-10-11-to-mariadb-11-4)).
+
+**Minor version upgrade** (same major line, e.g. 11.4.x → 11.4.y) — replace the binary in place:
 ```bash
+# Backup first (mariadb-backup recommended)
 systemctl stop mariadb
 # Replace binary via package manager (dnf/apt upgrade)
 systemctl start mariadb
 mariadb-upgrade    # updates system tables — do not skip this step
 ```
 
+**Major version upgrade** (e.g. 10.11 → 11.4) — do **not** use `dnf`/`apt upgrade` alone. Point the package manager at the new major-release MariaDB repository, then uninstall the old server packages and install the new ones:
+```bash
+# Backup first (mariadb-backup recommended)
+# 1. Update MariaDB repo config to the target major release
+systemctl stop mariadb
+# 2. Uninstall old packages (apt-get remove mariadb-server / dnf remove MariaDB-server)
+# 3. Install the new major version packages
+# 4. Adjust my.cnf for removed or renamed options if needed
+systemctl start mariadb
+mariadb-upgrade    # updates system tables — do not skip this step
+```
+
 **Galera Cluster rolling upgrade** — never stop all nodes simultaneously:
 1. Take one non-primary node out of the load balancer
-2. Stop, upgrade the binary, start the node
+2. Stop, upgrade the binary (minor vs major as above), start the node
 3. Confirm sync: `SHOW STATUS LIKE 'wsrep_local_state';` — must be `4` (Synced)
 4. Repeat for each remaining non-primary node
 5. Upgrade the primary node last
@@ -367,5 +384,3 @@ These require MariaDB **12.0 or newer** (many ship with **12.3 LTS**, currently 
 - [FLASHBACK — MariaDB Docs](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/flashback)
 
 *For topics not covered here, see the official MariaDB documentation at [mariadb.com/docs](https://mariadb.com/docs).*
-
-<sub>_This page is: Copyright © 2026 MariaDB. All rights reserved._</sub>
